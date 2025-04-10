@@ -2,9 +2,11 @@
 import React from 'react';
 import { MessageSquare, Code, LineChart, CheckCircle2, BarChart4, Bot } from 'lucide-react';
 import { cn } from '@/lib/utils';
+import { LucideIcon } from 'lucide-react';
 
+// Update the interface to use LucideIcon type
 const ServiceCard = ({ icon: Icon, title, description, className }: { 
-  icon: React.ComponentType<React.SVGProps<SVGSVGElement>>, 
+  icon: LucideIcon, 
   title: string, 
   description: string,
   className?: string

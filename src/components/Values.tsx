@@ -12,8 +12,10 @@ import {
   Bot, 
   TrendingUp 
 } from 'lucide-react';
+import { LucideIcon } from 'lucide-react';
 
-const ValueItem = ({ icon: Icon, title }: { icon: React.ComponentType<React.SVGProps<SVGSVGElement>>, title: string }) => (
+// Update the interface to use LucideIcon type
+const ValueItem = ({ icon: Icon, title }: { icon: LucideIcon, title: string }) => (
   <div className="flex items-center gap-4 glass-card p-4 rounded-lg hover:border-primary/30 transition-all">
     <div className="w-10 h-10 rounded-lg bg-primary/20 flex items-center justify-center shrink-0">
       <Icon size={20} className="text-primary" />
