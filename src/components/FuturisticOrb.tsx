@@ -50,7 +50,7 @@ const FuturisticOrb = () => {
     try {
       const canvas = document.createElement('canvas');
       // Try WebGL2 first (more modern)
-      let gl = canvas.getContext('webgl2');
+      let gl: WebGLRenderingContext | WebGL2RenderingContext | null = canvas.getContext('webgl2');
       
       // Fall back to WebGL1 if WebGL2 is not available
       if (!gl) {
@@ -66,16 +66,19 @@ const FuturisticOrb = () => {
       }
       
       // Additional checks for required WebGL extensions
-      const requiredExtensions = [
-        'OES_texture_float',
-        'OES_standard_derivatives'
-      ];
-      
-      // Check if any critical extensions are missing
-      const missingExtensions = requiredExtensions.filter(ext => !gl.getExtension(ext));
-      if (missingExtensions.length > 0) {
-        console.warn("Missing WebGL extensions:", missingExtensions);
-        // Continue anyway as these might not be critical
+      // Only check extensions if we have a WebGLRenderingContext (not WebGL2)
+      if (!(gl instanceof WebGL2RenderingContext) && gl) {
+        const requiredExtensions = [
+          'OES_texture_float',
+          'OES_standard_derivatives'
+        ];
+        
+        // Check if any critical extensions are missing
+        const missingExtensions = requiredExtensions.filter(ext => !gl?.getExtension(ext));
+        if (missingExtensions.length > 0) {
+          console.warn("Missing WebGL extensions:", missingExtensions);
+          // Continue anyway as these might not be critical
+        }
       }
       
       setWebGLFailed(false);
