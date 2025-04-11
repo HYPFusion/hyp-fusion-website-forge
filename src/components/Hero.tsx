@@ -1,93 +1,179 @@
-
 import React from 'react';
-import { ArrowRight } from 'lucide-react';
-import FuturisticOrb from './FuturisticOrb';
-import { ErrorBoundary } from 'react-error-boundary';
-
-// Fallback component for the entire FuturisticOrb if it fails
-const OrbFallback = () => (
-  <div className="relative w-full max-w-[500px]">
-    <div className="absolute inset-0 bg-primary/20 rounded-full filter blur-[50px]"></div>
-    <div className="w-full h-[400px] md:h-[500px] flex items-center justify-center">
-      <div className="text-center">
-        <div className="w-48 h-48 mx-auto rounded-full bg-primary/30 animate-pulse"></div>
-        <p className="text-gray-400 mt-4">Interactive visualization unavailable</p>
-      </div>
-    </div>
-  </div>
-);
+import { motion } from 'framer-motion';
+import { ArrowRight, Code2, Brain, Rocket } from 'lucide-react';
 
 const Hero = () => {
   return (
-    <section 
-      id="home" 
-      className="relative min-h-screen flex items-center bg-background overflow-hidden pt-16"
+    <section className="min-h-screen flex items-center justify-center relative overflow-hidden bg-black pt-20 md:pt-0">
+      {/* Static background with gradient */}
+      <div className="absolute inset-0">
+        <div className="absolute inset-0 bg-gradient-to-b from-black via-black/90 to-black" />
+        <div className="absolute inset-0 opacity-20" 
       style={{
-        backgroundImage: 'radial-gradient(circle at 10% 20%, rgba(109, 127, 255, 0.1) 0%, transparent 70%)',
+            backgroundImage: 'radial-gradient(circle at 50% 50%, rgba(109, 127, 255, 0.2) 0%, transparent 50%)',
         backgroundSize: '100% 100%',
-        backgroundRepeat: 'no-repeat'
-      }}
-    >
-      {/* Grid background */}
-      <div 
-        className="absolute inset-0 opacity-20" 
+          }}
+        />
+      </div>
+
+      {/* Static tech grid */}
+      <div className="absolute inset-0 opacity-10" 
         style={{ 
-          backgroundImage: 'linear-gradient(to right, #222 1px, transparent 1px), linear-gradient(to bottom, #222 1px, transparent 1px)',
+          backgroundImage: 'linear-gradient(to right, #6d7fff 1px, transparent 1px), linear-gradient(to bottom, #6d7fff 1px, transparent 1px)',
           backgroundSize: '40px 40px'
         }}
       />
       
-      {/* Animated gradient orbs */}
-      <div className="absolute top-1/4 left-1/4 w-96 h-96 bg-primary/30 rounded-full filter blur-[100px] animate-pulse-slow" />
-      <div className="absolute bottom-1/4 right-1/4 w-72 h-72 bg-blue-400/20 rounded-full filter blur-[80px] animate-pulse-slow animation-delay-200" />
-      
-      <div className="container mx-auto px-4 sm:px-6 lg:px-8 z-10">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-8">
-          <div className="w-full md:w-1/2 space-y-6 text-center md:text-left animate-fade-in">
-            <div className="inline-block px-3 py-1 rounded-full border border-primary/30 bg-primary/5 mb-4">
-              <span className="text-sm text-primary">Empowering Tomorrow with AI Innovation</span>
-            </div>
-            
-            <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold leading-tight">
-              <span className="text-gradient">HYP FUSION</span>
+      <div className="grid-container relative z-10">
+        <div className="flex flex-col md:flex-row items-center gap-12">
+          {/* Left content */}
+          <motion.div 
+            className="flex-1 space-y-8"
+            initial={{ opacity: 0, x: -50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <motion.h1 
+              className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mt-4 md:mt-0"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.4 }}
+            >
+              <span className="text-gradient">Transform</span>
               <br />
-              <span className="text-white">Where Technology Meets Innovation</span>
-            </h1>
-            
-            <p className="text-lg text-gray-300 max-w-xl">
-              Making cutting-edge artificial intelligence accessible to businesses, entrepreneurs, and tech enthusiasts.
-            </p>
-            
-            <div className="flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
-              <a 
+              <span className="text-white">Your Business with</span>
+              <br />
+              <span className="text-gradient">AI Innovation</span>
+            </motion.h1>
+
+            <motion.p 
+              className="text-xl text-gray-300 max-w-xl"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.6 }}
+            >
+              We specialize in cutting-edge AI solutions that drive growth, efficiency, and innovation for businesses of all sizes.
+            </motion.p>
+
+            <motion.div
+              className="flex flex-col sm:flex-row gap-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.8 }}
+            >
+              <motion.a
                 href="#contact" 
-                className="px-6 py-3 bg-primary hover:bg-primary/90 text-white font-medium rounded-lg flex items-center justify-center gap-2 transition-all"
+                className="px-8 py-4 bg-primary text-white rounded-lg hover:bg-primary/90 transition-colors flex items-center justify-center gap-2 group relative overflow-hidden"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                Get in Touch
-                <ArrowRight size={18} />
-              </a>
-              <a 
+                <span className="relative z-10">Start Your Journey</span>
+                <ArrowRight size={18} className="relative z-10 group-hover:translate-x-1 transition-transform" />
+                <motion.div
+                  className="absolute inset-0 bg-gradient-to-r from-primary to-blue-500 opacity-0 group-hover:opacity-100 transition-opacity"
+                  initial={{ x: '-100%' }}
+                  whileHover={{ x: '0%' }}
+                  transition={{ duration: 0.3 }}
+                />
+              </motion.a>
+              <motion.a
                 href="#services" 
-                className="px-6 py-3 bg-transparent hover:bg-white/5 border border-white/20 text-white font-medium rounded-lg transition-all"
+                className="px-8 py-4 border border-primary text-primary rounded-lg hover:bg-primary/10 transition-colors"
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
               >
-                Explore Our Services
-              </a>
+                Explore Solutions
+              </motion.a>
+            </motion.div>
+
+            {/* Feature highlights */}
+            <motion.div 
+              className="grid grid-cols-3 gap-4"
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 1 }}
+            >
+              <div className="flex items-center gap-2">
+                <Code2 className="text-primary" size={20} />
+                <span className="text-sm text-gray-300">Custom Solutions</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Brain className="text-primary" size={20} />
+                <span className="text-sm text-gray-300">AI Integration</span>
+              </div>
+              <div className="flex items-center gap-2">
+                <Rocket className="text-primary" size={20} />
+                <span className="text-sm text-gray-300">Fast Delivery</span>
             </div>
+            </motion.div>
+          </motion.div>
+
+          {/* Right content - Optimized HYP FUSION text */}
+          <motion.div 
+            className="flex-1 relative mt-8 md:mt-0"
+            initial={{ opacity: 0, x: 50 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8 }}
+          >
+            <div className="relative w-full aspect-square flex items-center justify-center">
+              {/* Simplified background effects */}
+              <div className="absolute inset-0">
+                <div className="absolute inset-0 bg-[radial-gradient(circle_at_center,_var(--tw-gradient-stops))] from-primary/20 via-transparent to-transparent" />
+                
+                {/* Single optimized ring */}
+                <motion.div
+                  className="absolute inset-0 border border-primary/40 rounded-full"
+                  animate={{
+                    scale: [1, 1.1, 1],
+                    opacity: [0.4, 0.7, 0.4],
+                  }}
+                  transition={{
+                    duration: 4,
+                    repeat: Infinity,
+                    ease: "easeInOut",
+                  }}
+                />
           </div>
           
-          <div className="w-full md:w-1/2 flex justify-center md:justify-end animate-fade-in animation-delay-200">
-            <ErrorBoundary 
-              FallbackComponent={OrbFallback}
-              onError={(error) => console.error("Visualization Error:", error)}
-            >
-              <div className="relative w-full max-w-[500px]">
-                {/* Glow effect behind orb */}
-                <div className="absolute inset-0 bg-primary/20 rounded-full filter blur-[50px]" />
-                {/* Updated professional animation */}
-                <FuturisticOrb />
+              {/* Main text with optimized animation */}
+              <motion.div
+                className="relative z-10 text-center"
+                initial={{ scale: 0.8, opacity: 0 }}
+                animate={{ scale: 1, opacity: 1 }}
+                transition={{ duration: 0.8, delay: 0.5 }}
+              >
+                <h2 className="text-6xl md:text-7xl lg:text-8xl font-bold">
+                  <span className="text-gradient">HYP</span>
+                  <br />
+                  <span className="text-gradient">FUSION</span>
+                </h2>
+              </motion.div>
+
+              {/* Reduced number of floating particles */}
+              <div className="absolute inset-0 pointer-events-none">
+                {[...Array(6)].map((_, i) => (
+                  <motion.div
+                    key={i}
+                    className="absolute w-1.5 h-1.5 rounded-full bg-primary/50"
+                    style={{
+                      left: `${Math.random() * 100}%`,
+                      top: `${Math.random() * 100}%`,
+                    }}
+                    animate={{
+                      y: [0, -20, 0],
+                      opacity: [0.4, 0.8, 0.4],
+                    }}
+                    transition={{
+                      duration: 3,
+                      repeat: Infinity,
+                      ease: "easeInOut",
+                      delay: i * 0.5,
+                    }}
+                  />
+                ))}
               </div>
-            </ErrorBoundary>
           </div>
+          </motion.div>
         </div>
       </div>
     </section>
