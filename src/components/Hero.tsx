@@ -1,6 +1,7 @@
 
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
+import FuturisticOrb from './FuturisticOrb';
 
 const Hero = () => {
   return (
@@ -61,13 +62,11 @@ const Hero = () => {
           </div>
           
           <div className="w-full md:w-1/2 flex justify-center md:justify-end animate-fade-in animation-delay-200">
-            <div className="relative">
-              <div className="absolute inset-0 bg-primary/20 rounded-full filter blur-[30px]" />
-              <img 
-                src="/lovable-uploads/aa9745db-0325-4a0e-9937-00f76631eddc.png" 
-                alt="HYP Fusion Logo" 
-                className="w-[300px] h-[300px] md:w-[400px] md:h-[400px] object-contain relative z-10 animate-float" 
-              />
+            <div className="relative w-full max-w-[500px]">
+              {/* Glow effect behind orb */}
+              <div className="absolute inset-0 bg-primary/20 rounded-full filter blur-[50px]" />
+              {/* 3D WebGL Animation */}
+              <FuturisticOrb />
             </div>
           </div>
         </div>
