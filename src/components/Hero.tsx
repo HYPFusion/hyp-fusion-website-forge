@@ -83,7 +83,7 @@ const Hero = () => {
               <div className="relative w-full max-w-[500px]">
                 {/* Glow effect behind orb */}
                 <div className="absolute inset-0 bg-primary/20 rounded-full filter blur-[50px]" />
-                {/* CSS-based Animation */}
+                {/* Updated professional animation */}
                 <FuturisticOrb />
               </div>
             </ErrorBoundary>
