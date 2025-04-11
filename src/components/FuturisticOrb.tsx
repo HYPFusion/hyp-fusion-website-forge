@@ -66,7 +66,7 @@ const FuturisticOrb = () => {
       <Canvas 
         camera={{ position: [0, 0, 5], fov: 45 }}
         onCreated={({ gl }) => {
-          gl.setClearColor(new THREE.Color(0, 0, 0, 0));
+          gl.setClearColor(new THREE.Color(0, 0, 0));
         }}
         onError={() => setWebGLFailed(true)}
       >
