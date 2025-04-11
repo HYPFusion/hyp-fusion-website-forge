@@ -1,5 +1,5 @@
 
-import React from 'react';
+import React, { Suspense } from 'react';
 import Navbar from '@/components/Navbar';
 import Hero from '@/components/Hero';
 import About from '@/components/About';
@@ -17,13 +17,15 @@ const Index = () => {
       <div className="fixed bottom-1/3 -right-32 w-96 h-96 bg-blue-500/10 rounded-full filter blur-[150px] z-0 animate-pulse-slow animation-delay-400" />
       
       <Navbar />
-      <Hero />
-      <About />
-      <Services />
-      <Approach />
-      <Values />
-      <Contact />
-      <Footer />
+      <Suspense fallback={<div className="min-h-screen flex items-center justify-center">Loading...</div>}>
+        <Hero />
+        <About />
+        <Services />
+        <Approach />
+        <Values />
+        <Contact />
+        <Footer />
+      </Suspense>
     </div>
   );
 };

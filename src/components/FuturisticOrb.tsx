@@ -46,14 +46,42 @@ const FuturisticOrb = () => {
   const [webGLFailed, setWebGLFailed] = useState(false);
   
   useEffect(() => {
-    // Check if WebGL is available
+    // More comprehensive WebGL detection
     try {
       const canvas = document.createElement('canvas');
-      const gl = canvas.getContext('webgl') || canvas.getContext('experimental-webgl');
-      setWebGLFailed(!gl);
+      // Try WebGL2 first (more modern)
+      let gl = canvas.getContext('webgl2');
+      
+      // Fall back to WebGL1 if WebGL2 is not available
+      if (!gl) {
+        gl = canvas.getContext('webgl') || 
+             canvas.getContext('experimental-webgl') as WebGLRenderingContext | null;
+      }
+      
+      // Check if we have a valid context
+      if (!gl) {
+        console.error("No WebGL support detected");
+        setWebGLFailed(true);
+        return;
+      }
+      
+      // Additional checks for required WebGL extensions
+      const requiredExtensions = [
+        'OES_texture_float',
+        'OES_standard_derivatives'
+      ];
+      
+      // Check if any critical extensions are missing
+      const missingExtensions = requiredExtensions.filter(ext => !gl.getExtension(ext));
+      if (missingExtensions.length > 0) {
+        console.warn("Missing WebGL extensions:", missingExtensions);
+        // Continue anyway as these might not be critical
+      }
+      
+      setWebGLFailed(false);
     } catch (e) {
+      console.error("WebGL detection error:", e);
       setWebGLFailed(true);
-      console.error("WebGL detection failed:", e);
     }
   }, []);
 
@@ -70,8 +98,8 @@ const FuturisticOrb = () => {
         onCreated={({ gl }) => {
           gl.setClearColor(new THREE.Color(0, 0, 0));
         }}
-        onError={() => {
-          console.error("Canvas error occurred");
+        onError={(e) => {
+          console.error("Canvas error occurred:", e);
           setWebGLFailed(true);
         }}
       >

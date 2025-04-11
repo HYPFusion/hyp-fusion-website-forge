@@ -76,7 +76,10 @@ const Hero = () => {
           </div>
           
           <div className="w-full md:w-1/2 flex justify-center md:justify-end animate-fade-in animation-delay-200">
-            <ErrorBoundary FallbackComponent={OrbFallback}>
+            <ErrorBoundary 
+              FallbackComponent={OrbFallback}
+              onError={(error) => console.error("3D Visualization Error:", error)}
+            >
               <div className="relative w-full max-w-[500px]">
                 {/* Glow effect behind orb */}
                 <div className="absolute inset-0 bg-primary/20 rounded-full filter blur-[50px]" />

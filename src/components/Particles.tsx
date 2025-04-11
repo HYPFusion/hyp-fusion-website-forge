@@ -1,7 +1,6 @@
 
 import React, { useRef, useMemo } from 'react';
 import { useFrame } from '@react-three/fiber';
-import { PointMaterial } from '@react-three/drei';
 import * as THREE from 'three';
 
 interface ParticlesProps {
@@ -9,29 +8,25 @@ interface ParticlesProps {
   color?: string;
 }
 
-const Particles = ({ count = 500, color = "#6d7fff" }: ParticlesProps) => {
+const Particles = ({ count = 200, color = "#6d7fff" }: ParticlesProps) => {
   const mesh = useRef<THREE.Points>(null);
   
   // Generate random particle positions
-  const particlesPosition = useMemo(() => {
-    const positions = new Float32Array(count * 3);
-    
+  const positions = useMemo(() => {
+    const pos = new Float32Array(count * 3);
     for (let i = 0; i < count; i++) {
       const i3 = i * 3;
-      positions[i3] = (Math.random() - 0.5) * 10;
-      positions[i3 + 1] = (Math.random() - 0.5) * 10;
-      positions[i3 + 2] = (Math.random() - 0.5) * 10;
+      pos[i3] = (Math.random() - 0.5) * 7;
+      pos[i3 + 1] = (Math.random() - 0.5) * 7;
+      pos[i3 + 2] = (Math.random() - 0.5) * 7;
     }
-    
-    return positions;
+    return pos;
   }, [count]);
   
-  // Animate the particles
-  useFrame((state) => {
+  useFrame(({ clock }) => {
     if (mesh.current) {
-      const time = state.clock.getElapsedTime();
-      mesh.current.rotation.x = time * 0.05;
-      mesh.current.rotation.y = time * 0.03;
+      mesh.current.rotation.x = clock.getElapsedTime() * 0.03;
+      mesh.current.rotation.y = clock.getElapsedTime() * 0.02;
     }
   });
   
@@ -40,16 +35,17 @@ const Particles = ({ count = 500, color = "#6d7fff" }: ParticlesProps) => {
       <bufferGeometry>
         <bufferAttribute
           attach="attributes-position"
-          count={particlesPosition.length / 3}
-          array={particlesPosition}
+          count={count}
+          array={positions}
           itemSize={3}
         />
       </bufferGeometry>
-      <PointMaterial
-        size={0.03}
-        transparent
+      <pointsMaterial
+        size={0.02}
         color={color}
         sizeAttenuation={true}
+        transparent
+        opacity={0.8}
         depthWrite={false}
       />
     </points>
