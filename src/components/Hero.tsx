@@ -2,6 +2,20 @@
 import React from 'react';
 import { ArrowRight } from 'lucide-react';
 import FuturisticOrb from './FuturisticOrb';
+import { ErrorBoundary } from 'react-error-boundary';
+
+// Fallback component for the entire FuturisticOrb if it fails
+const OrbFallback = () => (
+  <div className="relative w-full max-w-[500px]">
+    <div className="absolute inset-0 bg-primary/20 rounded-full filter blur-[50px]"></div>
+    <div className="w-full h-[400px] md:h-[500px] flex items-center justify-center">
+      <div className="text-center">
+        <div className="w-48 h-48 mx-auto rounded-full bg-primary/30 animate-pulse"></div>
+        <p className="text-gray-400 mt-4">Interactive visualization unavailable</p>
+      </div>
+    </div>
+  </div>
+);
 
 const Hero = () => {
   return (
@@ -62,12 +76,14 @@ const Hero = () => {
           </div>
           
           <div className="w-full md:w-1/2 flex justify-center md:justify-end animate-fade-in animation-delay-200">
-            <div className="relative w-full max-w-[500px]">
-              {/* Glow effect behind orb */}
-              <div className="absolute inset-0 bg-primary/20 rounded-full filter blur-[50px]" />
-              {/* 3D WebGL Animation or Fallback */}
-              <FuturisticOrb />
-            </div>
+            <ErrorBoundary FallbackComponent={OrbFallback}>
+              <div className="relative w-full max-w-[500px]">
+                {/* Glow effect behind orb */}
+                <div className="absolute inset-0 bg-primary/20 rounded-full filter blur-[50px]" />
+                {/* 3D WebGL Animation or Fallback */}
+                <FuturisticOrb />
+              </div>
+            </ErrorBoundary>
           </div>
         </div>
       </div>

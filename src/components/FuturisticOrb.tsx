@@ -18,7 +18,7 @@ const AnimatedSphere = () => {
   return (
     <Sphere ref={sphereRef} args={[1, 100, 100]} scale={2.2}>
       <MeshDistortMaterial 
-        color={"#6d7fff"}
+        color="#6d7fff"
         attach="material" 
         distort={0.4} 
         speed={1.5} 
@@ -53,11 +53,13 @@ const FuturisticOrb = () => {
       setWebGLFailed(!gl);
     } catch (e) {
       setWebGLFailed(true);
+      console.error("WebGL detection failed:", e);
     }
   }, []);
 
   // If WebGL is not available, show fallback
   if (webGLFailed) {
+    console.log("Using fallback animation - WebGL not available");
     return <FallbackAnimation />;
   }
 
@@ -68,7 +70,10 @@ const FuturisticOrb = () => {
         onCreated={({ gl }) => {
           gl.setClearColor(new THREE.Color(0, 0, 0));
         }}
-        onError={() => setWebGLFailed(true)}
+        onError={() => {
+          console.error("Canvas error occurred");
+          setWebGLFailed(true);
+        }}
       >
         <ambientLight intensity={0.5} />
         <directionalLight position={[10, 10, 5]} intensity={1} color="#ffffff" />
