@@ -31,13 +31,20 @@ const Hero = () => {
             className="flex-1 space-y-8"
             initial={{ opacity: 0, x: -50 }}
             animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.8 }}
+            transition={{ 
+              duration: 0.8,
+              ease: "easeOut"
+            }}
           >
             <motion.h1 
               className="text-4xl sm:text-5xl md:text-6xl lg:text-7xl font-bold leading-tight mt-4 md:mt-0"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.4 }}
+              transition={{ 
+                duration: 0.7,
+                delay: 0.4,
+                ease: "easeOut"
+              }}
             >
               <span className="text-gradient">Transform</span>
               <br />
@@ -50,7 +57,11 @@ const Hero = () => {
               className="text-xl text-gray-300 max-w-xl"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.6 }}
+              transition={{ 
+                duration: 0.7,
+                delay: 0.6,
+                ease: "easeOut"
+              }}
             >
               We specialize in cutting-edge AI solutions that drive growth, efficiency, and innovation for businesses of all sizes.
             </motion.p>
@@ -59,7 +70,11 @@ const Hero = () => {
               className="flex flex-col sm:flex-row gap-4"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.8 }}
+              transition={{ 
+                duration: 0.7,
+                delay: 0.8,
+                ease: "easeOut"
+              }}
             >
               <motion.a
                 href="#contact" 
